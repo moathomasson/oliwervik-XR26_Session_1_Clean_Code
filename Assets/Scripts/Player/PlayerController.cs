@@ -38,18 +38,18 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
     }
 
-    void HandleMove(Vector2 direction)
+   public void HandleMove(Vector2 direction)
     {
         currentVelocity = (transform.forward * direction.y + transform.right * direction.x).normalized * moveSpeed;
     }
 
-    void HandleRotate(float mouseX)
+   public void HandleRotate(float mouseX)
     {
         yaw += mouseX * rotationSpeed;
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
     }
 
-    void HandleJump()
+    public void HandleJump()
     {
         if (isGrounded)
         {
