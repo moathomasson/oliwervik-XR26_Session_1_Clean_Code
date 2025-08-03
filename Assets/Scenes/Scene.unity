@@ -952,10 +952,10 @@ GameObject:
   m_Component:
   - component: {fileID: 854150333}
   - component: {fileID: 854150332}
-  - component: {fileID: 854150337}
   - component: {fileID: 854150336}
   - component: {fileID: 854150335}
   - component: {fileID: 854150334}
+  - component: {fileID: 854150338}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -975,12 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ddc5c574bf5bc42b27e1baf8973e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: 0
-  gameTime: 0
-  gameStatusText: {fileID: 1779772983}
-  timerText: {fileID: 788424806}
-  gameOverPanel: {fileID: 938857967}
-  player: {fileID: 1351524419}
 --- !u!4 &854150333
 Transform:
   m_ObjectHideFlags: 0
@@ -1008,8 +1002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6879db2d8bc4864449c9c8cfbb49ec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorableObject: {fileID: 0}
-  gameState: {fileID: 0}
+  scorableObject: {fileID: 1351524419}
+  gameState: {fileID: 854150336}
 --- !u!114 &854150335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,13 +1031,25 @@ MonoBehaviour:
   OnGameOver:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 938857967}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 854150335}
+        m_TargetAssemblyTypeName: RestartHandler, Assembly-CSharp
+        m_MethodName: EnableRestart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1980623008}
+        m_TargetAssemblyTypeName: GameUIController, Assembly-CSharp
+        m_MethodName: ShowGameOverMessage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1051,8 +1057,32 @@ MonoBehaviour:
         m_CallState: 2
   OnWin:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &854150337
+      m_Calls:
+      - m_Target: {fileID: 854150335}
+        m_TargetAssemblyTypeName: RestartHandler, Assembly-CSharp
+        m_MethodName: EnableRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1980623008}
+        m_TargetAssemblyTypeName: GameUIController, Assembly-CSharp
+        m_MethodName: ShowWinMessage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &854150338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1061,12 +1091,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 854150331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b70337c9852e18c46bdcd13813f1de09, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e4fc9b8e295fb74b8061409cc4b9fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStatusText: {fileID: 1779772983}
-  timerText: {fileID: 788424806}
-  gameOverPanel: {fileID: 938857967}
+  OnScoreChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1751772315}
+        m_TargetAssemblyTypeName: ScoreDisplay, Assembly-CSharp
+        m_MethodName: UpdateScoreText
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &884752359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1031782361}
   - component: {fileID: 1031782362}
+  - component: {fileID: 1031782363}
   m_Layer: 5
   m_Name: Healthbar
   m_TagString: Untagged
@@ -1268,6 +1311,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1031782363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031782360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3976b9bcf6d797f40a294644a0d27240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 1351524426}
+  healthBar: {fileID: 1031782362}
+  _healthText: {fileID: 0}
 --- !u!1 &1103456195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,7 +1769,8 @@ GameObject:
   - component: {fileID: 1351524421}
   - component: {fileID: 1351524424}
   - component: {fileID: 1351524423}
-  - component: {fileID: 1351524422}
+  - component: {fileID: 1351524426}
+  - component: {fileID: 1351524425}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1856,22 +1915,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1351524422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351524415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: febbe10110b43ca419dd28dc348f931f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 30
-  scoreText: {fileID: 1751772313}
-  healthBar: {fileID: 1031782362}
-  gameState: {fileID: 854150336}
 --- !u!114 &1351524423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1888,12 +1931,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1351524424}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: HandleMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1901,10 +1944,34 @@ MonoBehaviour:
         m_CallState: 2
   OnRotate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1351524424}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: HandleRotate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnJump:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1351524424}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: HandleJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1351524424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,6 +1988,61 @@ MonoBehaviour:
   jumpForce: 10
   rotationSpeed: 0.5
   input: {fileID: 1351524423}
+--- !u!114 &1351524425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351524415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4fc9b8e295fb74b8061409cc4b9fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnScoreChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1751772315}
+        m_TargetAssemblyTypeName: ScoreDisplay, Assembly-CSharp
+        m_MethodName: UpdateScoreText
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1351524426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351524415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd13df4945bf6a4bafa0d4feb2fc3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1031782363}
+        m_TargetAssemblyTypeName: HealthDisplay, Assembly-CSharp
+        m_MethodName: UpdateHealthDisplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1751772311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,6 +2054,7 @@ GameObject:
   - component: {fileID: 1751772312}
   - component: {fileID: 1751772314}
   - component: {fileID: 1751772313}
+  - component: {fileID: 1751772315}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -2057,6 +2180,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751772311}
   m_CullTransparentMesh: 1
+--- !u!114 &1751772315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751772311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c454f7ff2c92224cacaf79d6c7a62cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1751772313}
+  scoreSystem: {fileID: 1351524425}
 --- !u!1 &1779772980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2553,7 @@ GameObject:
   - component: {fileID: 1980623007}
   - component: {fileID: 1980623006}
   - component: {fileID: 1980623005}
+  - component: {fileID: 1980623008}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2510,6 +2648,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1980623008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980623003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70337c9852e18c46bdcd13813f1de09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStatusText: {fileID: 1779772983}
+  timerText: {fileID: 788424806}
+  gameOverPanel: {fileID: 938857967}
 --- !u!1 &1998308298
 GameObject:
   m_ObjectHideFlags: 0

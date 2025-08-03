@@ -1,23 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class HealthDisplay : MonoBehaviour //Subscriber
+public class HealthDisplay : MonoBehaviour
 {
-    public Slider healthSlider;
-    public PlayerHealth playerHealth;
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI _healthText; 
 
-    private void OnEnable()
+    void OnEnable()
     {
-        playerHealth.OnHealthChanged.AddListener(UpdateHealthBar);
+        playerHealth.OnHealthChanged.AddListener(UpdateHealthDisplay);
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
-        playerHealth.OnHealthChanged.RemoveListener(UpdateHealthBar);
+        playerHealth.OnHealthChanged.RemoveListener(UpdateHealthDisplay);
     }
 
-    private void UpdateHealthBar(float newHealth)
+    void UpdateHealthDisplay(int currentHealth, int maxHealth)
     {
-        healthSlider.value = newHealth;
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
+   
+        if (_healthText != null)
+        {
+            _healthText.text = $"{currentHealth} / {maxHealth}";
+        }
     }
 }
